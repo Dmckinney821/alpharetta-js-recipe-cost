@@ -5,7 +5,22 @@ import Textbox from '..components/testbox';
 import { recipes } from '../data/recipes';
 
 class App extends Component {
-  render() {
+  constructor(props) { 
+  super(props);
+  this.state = {
+    recipes,
+    apple: '',
+    age: 123
+  };
+
+  handleAddRecipe(){
+    const newRecipes = JSON.parse(JSON.stringify(this.state.recipes));
+    newRecipes.push({name: 'chicken parm', ingredients: ['chicken', 'stuff']});
+    this.setState({
+      recipes: newRecipes
+    });
+  };
+  render(){
     const recipeElements = recipes.map((recipe) => {
       return (
         <div key={}>{recipe.name}</div>
@@ -21,7 +36,7 @@ class App extends Component {
 
           Hello World
           <TextBox text='Hello WOrld' />
-
+          { recipeElements }
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
       </div>
